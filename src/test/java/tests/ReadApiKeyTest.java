@@ -14,7 +14,7 @@ public class ReadApiKeyTest {
     @Test
     void sendGetWithApiKey() {
         when()
-                .get(linkSearch + "q=election&api-key=" + apiKey)
+                .get(linkSearch + "q=election" + apiKey)
                 .then()
                 .statusCode(200)
                 .body("status", equalTo("OK"));
@@ -23,6 +23,8 @@ public class ReadApiKeyTest {
     @Test
     void sendGetWithInvalidApiKey() {
         when()
-                .get();
+                .get(linkSearch + "q=election" + apiKey + "123")
+                .then()
+                .statusCode(401);
     }
 }
